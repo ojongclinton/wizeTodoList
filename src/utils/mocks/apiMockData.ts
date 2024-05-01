@@ -77,13 +77,8 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
     return [200, { message: "All users", data: users }];
   });
 
-  mock.onGet("/user/{id}").reply((config) => {
-    const id = config.params.id;
-    const user = users.find((u) => u.id === id);
 
-    if (!user) return [404, { message: "User not found" }];
-    return [200, { message: "User", data: user }];
-  });
+
 
   mock.onAny().reply(200, {
     status: "Any other call will get this 😀",
