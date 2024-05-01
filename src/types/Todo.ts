@@ -1,7 +1,7 @@
-interface Todo {
+export interface Todo {
   id: string;
   title: string;
-  assignee: Assignee;
+  assignee: Assignee | null;
   startDate: Date;
   endDate: Date;
   description: string;
@@ -9,16 +9,16 @@ interface Todo {
   labels: Labels[];
 }
 
-enum Priority {
-  LOW,
-  MEDIUM,
-  HIGH,
-  URGENT,
+export enum Priority {
+  LOW = "LOW",
+  MEDIUM = "MEDIUM",
+  HIGH = "HIGH",
+  URGENT = "URGENT",
 }
 
-enum Labels {
-  BACKLOG,
-  IN_PROGRESS,
-  IN_REVIEW,
-  DONE,
+export enum Labels {
+  BACKLOG = "BACKLOG",
+  IN_PROGRESS = "IN_PROGRESS",
+  IN_REVIEW = "IN_REVIEW",
+  DONE = "DONE",
 }
