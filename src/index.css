@@ -49,3 +49,12 @@ a.nav-link-single {
 .pending {
   background-color: green;
 }
+
+thead {
+  background-color: #724060;
+}
+
+th {
+  color:white !important;
+  font-weight: 900 !important;
+}

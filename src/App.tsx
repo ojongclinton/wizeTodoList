@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import todoMock from "@/utils/mocks/apiMockData";
-import axiosInstance from "@utils/axios";
+import axiosInstance from "@/utils/api/axios";
 
 function App() {
   const [count, setCount] = useState(0);
