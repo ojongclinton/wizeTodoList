@@ -74,11 +74,8 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
   });
 
   mock.onGet("/users").reply((config) => {
-    return [200, { message: "All users", data: users }];
+    return [200, { staus: "success", data: users }];
   });
-
-
-
 
   mock.onAny().reply(200, {
     status: "Any other call will get this 😀",
