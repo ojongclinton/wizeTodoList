@@ -7,8 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import AddUserModal from "./Partials/AddUserModal";
+import WizeButton from "@/components/WizeButton/WizeButton";
 
 function Assignee() {
+  const [selectedAssignee, setSelectedAssignee] = useState<Assignee>();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,6 +26,17 @@ function Assignee() {
     fetchData();
   }, []);
   const [allAssignees, setAllAssignees] = useState<Assignee[]>([]);
+  const [userModalVisible, setUserModalVisible] = useState<boolean>(false);
+
+  const handleViewUser: (a: Assignee) => void = (assignee) => {
+    setUserModalVisible(true);
+    setSelectedAssignee(assignee);
+  };
+
+  const handleModalClose = () => {
+    setUserModalVisible(false);
+    setSelectedAssignee(undefined);
+  };
 
   return (
     <div>
@@ -44,8 +58,8 @@ function Assignee() {
                 <TableCell scope="row">{row.name}</TableCell>
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="right">{row.phone}</TableCell>
-                <TableCell align="right" component="div">
-                  <button>View</button>
+                <TableCell align="right">
+                  <button onClick={() => handleViewUser(row)}>View</button>
                   <button>Delete</button>
                 </TableCell>
               </TableRow>
@@ -53,6 +67,13 @@ function Assignee() {
           </TableBody>
         </Table>
       </TableContainer>
+      in assignee page, usemodal is : {userModalVisible ? "true" : "false"}
+      <WizeButton onClick={() => setUserModalVisible(!userModalVisible)} />
+      <AddUserModal
+        selectedAssignee={selectedAssignee}
+        handleClose={handleModalClose}
+        isOpen={userModalVisible}
+      />
     </div>
   );
 }
