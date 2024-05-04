@@ -38,21 +38,9 @@ let todos: Todo[] = localTodos;
 export default function applyMockAdapter(axiosInstance: AxiosInstance) {
   const mock = new MockAdapter(axiosInstance);
 
+  //USER-ROUTES
   mock.onPost("/users/create").reply((config) => {
     console.log("incoming create user request");
-    const body = JSON.parse(config.data);
-    if (!body) {
-      return [422, { message: "You must provide a user" }];
-    }
-    if (!body.name) {
-      return [422, { message: "Asignee must have a name" }];
-    }
-    if (!body.email) {
-      return [422, { message: "Asignee must have an email" }];
-    }
-    if (!body.phone) {
-      return [422, { message: "Asignee must have a telephone number" }];
-    }
     const user: Assignee = JSON.parse(config.data);
     users.push({ ...user, id: uuidv4() });
     updateLocalStorage(USERS_KEY, users);
@@ -62,12 +50,6 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
 
   mock.onPut("/users/update").reply((config) => {
     const body = JSON.parse(config.data);
-    if (!body) {
-      return [422, { message: "You must provide a user" }];
-    }
-    if (!body.id) {
-      return [422, { message: "Asignee must have an id" }];
-    }
     const user: Assignee = JSON.parse(config.data);
     users = users.map((u) => (u.id === user.id ? user : u));
     updateLocalStorage(USERS_KEY, users);
@@ -93,4 +75,43 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
     status: "Any other call will get this 😀",
     moreData: users,
   });
+
+  //TODO-ROUTES
+  mock.onPost("/todos/create").reply((config) => {
+    console.log("incoming create todo request");
+    const todo: Todo = JSON.parse(config.data);
+    todos.push({ ...todo, id: uuidv4() });
+    updateLocalStorage(TODOS_KEY, todos);
+
+    return [200, { message: "Todo added succesfully", data: todo }];
+  });
+
+  mock.onGet("/todos").reply((config) => {
+    return [200, { staus: "success", data: todos }];
+  });
+
+  mock.onPut("/todos/update").reply((config) => {
+    const todo: Todo = JSON.parse(config.data);
+    todos = todos.map((t) => (t.id === todo.id ? todo : t));
+    updateLocalStorage(TODOS_KEY, todos);
+
+    return [200, { message: "Todo updated succesfully", data: todo }];
+  });
+
+  mock.onDelete(/\/todos\/delete\/([^/]+)/).reply((config) => {
+    const todoId = config.url?.split("/")[3];
+    todos = todos.filter((t) => t.id !== todoId);
+    updateLocalStorage(TODOS_KEY, todos);
+
+    return [200, { message: "Todo deleted succesfully" }];
+  })
+
+  mock.onPost('/todo/assignToAssignee').reply((config)=>{
+    const todo: Todo = JSON.parse(config.data);
+    todos = todos.map((t) => (t.id === todo.id ? todo : t));
+    updateLocalStorage(TODOS_KEY, todos);
+
+    return [200, { message: "Todo updated succesfully", data: todo }];
+  })
+
 }

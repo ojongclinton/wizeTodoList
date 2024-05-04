@@ -9,7 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AddUserModal from "./Partials/AddAssigneeModal";
 import WizeButton from "@/components/WizeButton/WizeButton";
-import { validateInputObj } from "@/utils/validator";
 
 function Assignee() {
   const [selectedAssignee, setSelectedAssignee] = useState<Assignee>();
