@@ -20,7 +20,6 @@ const WizeModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <>
-      {modalOpen ? "modal is open" : "modal is close"}
       {modalOpen && (
         <div className="wize-modal-overlay" onClick={handleClose}>
           <div
