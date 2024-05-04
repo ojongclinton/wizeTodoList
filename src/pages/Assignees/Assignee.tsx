@@ -1,4 +1,4 @@
-import { getAllUsers } from "@/utils/api/Assignees";
+import { getAllUsers, deleteUser } from "@/utils/api/Assignees";
 import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,8 +7,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import AddUserModal from "./Partials/AddUserModal";
+import AddUserModal from "./Partials/AddAssigneeModal";
 import WizeButton from "@/components/WizeButton/WizeButton";
+import { validateInputObj } from "@/utils/validator";
 
 function Assignee() {
   const [selectedAssignee, setSelectedAssignee] = useState<Assignee>();
@@ -38,38 +39,58 @@ function Assignee() {
     setSelectedAssignee(undefined);
   };
 
+  const addAssigneeToList = (u: Assignee) => {
+    setAllAssignees([...allAssignees, u]);
+  };
+
+  const editAssigneeInList = (u: Assignee) => {
+    setAllAssignees(allAssignees.map((a) => (a.id === u.id ? u : a)));
+  };
+
+  const removeAssigneeFromList = async (u: Assignee) => {
+    setAllAssignees(allAssignees.filter((a) => a.id !== u.id));
+    await deleteUser(u.id);
+  };
+
   return (
     <div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell component="th" style={{ fontWeight: 900 }}>
-                Full name
-              </TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="right">Telephone</TableCell>
-              <TableCell align="right">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {allAssignees.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell scope="row">{row.name}</TableCell>
-                <TableCell align="left">{row.email}</TableCell>
-                <TableCell align="right">{row.phone}</TableCell>
-                <TableCell align="right">
-                  <button onClick={() => handleViewUser(row)}>View</button>
-                  <button>Delete</button>
+      <div style={{ margin: "10px 0px" }}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell component="th" style={{ fontWeight: 900 }}>
+                  Full name
                 </TableCell>
+                <TableCell align="left">Email</TableCell>
+                <TableCell align="right">Telephone</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      in assignee page, usemodal is : {userModalVisible ? "true" : "false"}
-      <WizeButton onClick={() => setUserModalVisible(!userModalVisible)} />
+            </TableHead>
+            <TableBody>
+              {allAssignees.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell scope="row">{row.name}</TableCell>
+                  <TableCell align="left">{row.email}</TableCell>
+                  <TableCell align="right">{row.phone}</TableCell>
+                  <TableCell align="right">
+                    <button onClick={() => handleViewUser(row)}>View</button>
+                    <button onClick={() => removeAssigneeFromList(row)}>
+                      Delete
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      <WizeButton onClick={() => setUserModalVisible(!userModalVisible)}>
+        Create Assignee
+      </WizeButton>
       <AddUserModal
+        addAssigneeFunc={addAssigneeToList}
+        editAssigneeFunc={editAssigneeInList}
         selectedAssignee={selectedAssignee}
         handleClose={handleModalClose}
         isOpen={userModalVisible}
