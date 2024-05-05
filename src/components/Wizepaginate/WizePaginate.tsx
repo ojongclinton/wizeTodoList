@@ -11,16 +11,16 @@ const WizePaginate: React.FC<PaginatorProps> = ({
   setData,
   onPageChange,
 }) => {
-  const perPage = 5; // Number of items per page
+  const perPage = 2; // Number of items per page
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * perPage;
     const endIndex = startIndex + perPage;
     const paginatedData = data.slice(startIndex, endIndex);
-    setData(paginatedData);
+    if (paginatedData) setData(paginatedData);
     onPageChange(paginatedData); // Pass paginated data back to parent component
-  }, [currentPage, data, setData, onPageChange, perPage]);
+  }, [currentPage, data, setData, perPage]); // Only re-run the effect if these dependencies change
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);

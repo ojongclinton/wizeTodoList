@@ -65,6 +65,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
     "FEATURE",
     "BUG",
   ];
+  const allPriorities = ["LOW", "MEDIUM", "HIGH", "URGENT"];
   let validationRes = validateInputObj(modalTodo);
 
   useEffect(() => {
@@ -196,13 +197,30 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
 
               <div className="inputContainer">
                 <label id="todo-endDate">Priority</label>
-                <WizeInput
-                  id="todo-endDate"
-                  type="text"
-                  name="priority"
-                  value={modalTodo?.priority}
-                  readOnly={modalAction === ModalAction.VIEW}
-                  onChange={(e) => handleChange("priority", e.target.value)}
+                <Autocomplete
+                  disablePortal
+                  autoHighlight
+                  onChange={(e) => {
+                    handleChange(
+                      "priority",
+                      allPriorities[parseInt(e.target.dataset.optionIndex)]
+                    );
+                  }}
+                  readOnly={modalAction == ModalAction?.VIEW ? true : false}
+                  value={modalTodo.priority}
+                  getOptionLabel={(option: any) => option}
+                  options={allPriorities}
+                  renderInput={(params) => (
+                    <div style={{ width: "20rem" }}>
+                      <TextField
+                        {...params}
+                        size="small"
+                        fullWidth
+                        label="Assignee"
+                        variant="outlined"
+                      />
+                    </div>
+                  )}
                 />
                 <p className="error">
                   {showErrors && !validationRes?.name && (
@@ -223,11 +241,6 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                       if (!e.target.checked) handleChange("endDate", null);
                     }}
                   />
-                  <p className="error">
-                    {showErrors && !validationRes?.name && (
-                      <span>Enter a valid name</span>
-                    )}
-                  </p>
                 </div>
               )}
             </div>
@@ -249,7 +262,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
             </div>
             <div className="inputContainer flex justify-btw">
               <div className="addedLabels">
-                <p>Added labels</p>
+                <p>Added labels (click to remove)</p>
                 {modalTodo?.labels?.map((label, i) => (
                   <p
                     className="chip"
@@ -267,7 +280,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
               </div>
               <div className="adableLabel">
                 <p>
-                  <u> Available labels</u>
+                  <u> Available labels(Click to add)</u>
                 </p>
                 {allLabels.map((label, i) => {
                   let found = modalTodo?.labels?.find((l) => l == label);

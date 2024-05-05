@@ -7,6 +7,7 @@ import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
 import WizeSearch from "@/components/WizeSearch/WizeSearch";
 import WizePaginate from "@/components/Wizepaginate/WizePaginate";
 import WizePriority from "@/components/WizePriority/WizePriority";
+import WizeFilter from "@/components/WizeFilter/WIzeFilter";
 
 function Todos() {
   const [selectedTodo, setSelectedTodo] = useState<Todo>();
@@ -87,7 +88,6 @@ function Todos() {
       label: "Start Date",
       acess: "startDate",
       render: (startDate: any) => {
-        console.log(startDate);
         return startDate
           ? new Date(startDate).toLocaleDateString()
           : "Not started";
@@ -110,6 +110,7 @@ function Todos() {
           setSearchString={setSearchString}
           originalData={allTodosCopy}
         />
+        {/* <WizeFilter data={allTodos} setData={setAllTodos} /> */}
         <WizeDataGrid
           data={paginatedTodos}
           columns={todosColumns}
@@ -118,7 +119,7 @@ function Todos() {
       </div>
       <WizePaginate
         data={allTodos}
-        setData={setPaginatedTodos} // Pass setPaginatedAssignees instead of setAllAssignees
+        setData={setPaginatedTodos}
         onPageChange={handlePageChange}
       />
 
