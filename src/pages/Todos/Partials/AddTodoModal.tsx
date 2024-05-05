@@ -85,6 +85,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
     }
   }, [selectedTodo]);
 
+  
   const handleChange = (name: string, value: any) => {
     setModalTodo((prevState) => ({
       ...prevState,
@@ -143,7 +144,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                 </p>
               </div>
               <div className="inputContainer">
-                <label id="assign-name">Task Title:</label>
+                <label id="assign-name">Select assignee</label>
                 <Autocomplete
                   disablePortal
                   autoHighlight
@@ -303,7 +304,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
           </div>
           {modalAction == ModalAction.NEW && (
             <div className="fl-r">
-              <WizeButton onClick={handleUserCreate}>Create User</WizeButton>
+              <WizeButton onClick={handleUserCreate}>Create Todo</WizeButton>
             </div>
           )}
           {modalAction == ModalAction.VIEW && (
