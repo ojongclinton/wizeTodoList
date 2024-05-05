@@ -103,7 +103,7 @@ function Assignee() {
       </div>
       <WizePaginate
         data={allAssignees}
-        setData={setPaginatedAssignees} // Pass setPaginatedAssignees instead of setAllAssignees
+        setData={setPaginatedAssignees}
         onPageChange={handlePageChange}
       />
       <WizeButton onClick={() => setUserModalVisible(!userModalVisible)}>

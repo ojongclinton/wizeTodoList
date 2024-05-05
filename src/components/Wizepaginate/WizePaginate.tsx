@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 interface PaginatorProps {
   data: any[];
   setData: React.Dispatch<React.SetStateAction<any[]>>;
-  onPageChange: (data: any[]) => void; // Callback function to handle page change
+  onPageChange: (data: any[]) => void; 
 }
 
 const WizePaginate: React.FC<PaginatorProps> = ({
@@ -11,7 +11,7 @@ const WizePaginate: React.FC<PaginatorProps> = ({
   setData,
   onPageChange,
 }) => {
-  const perPage = 2; // Number of items per page
+  const perPage = 6; 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
@@ -19,8 +19,8 @@ const WizePaginate: React.FC<PaginatorProps> = ({
     const endIndex = startIndex + perPage;
     const paginatedData = data.slice(startIndex, endIndex);
     if (paginatedData) setData(paginatedData);
-    onPageChange(paginatedData); // Pass paginated data back to parent component
-  }, [currentPage, data, setData, perPage]); // Only re-run the effect if these dependencies change
+    onPageChange(paginatedData); 
+  }, [currentPage, data, setData, perPage]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);

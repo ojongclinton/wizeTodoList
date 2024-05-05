@@ -31,7 +31,6 @@ const localTodos = getLocalStorageOrInitial(TODOS_KEY, initialTodos);
 updateLocalStorage(USERS_KEY, localUsers);
 updateLocalStorage(TODOS_KEY, localTodos);
 
-// Now you can safely use users and todos
 let users: Assignee[] = localUsers;
 let todos: Todo[] = localTodos;
 
@@ -70,11 +69,6 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
   mock.onGet("/users").reply((config) => {
     return [200, { staus: "success", data: users }];
   });
-
-  // mock.onAny().reply(200, {
-  //   status: "Any other call will get this 😀",
-  //   moreData: users,
-  // });
 
   //TODO-ROUTES
   mock.onPost("/todos/create").reply((config) => {

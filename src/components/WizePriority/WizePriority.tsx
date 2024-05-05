@@ -10,23 +10,23 @@ const WizePriority: React.FC<WizePriorityProps> = ({ level }) => {
 
   switch (level) {
     case "low":
-      color = "#3BB273"; // Green for low priority
+      color = "#3BB273"; // Green
       label = level.toUpperCase();
       break;
     case "medium":
-      color = "#FFA500"; // Orange for medium priority
+      color = "#FFA500"; // Orange
       label = level.toUpperCase();
       break;
     case "high":
-      color = "#FF5733"; // Red for high priority
+      color = "#FF5733"; // Red
       label = level.toUpperCase();
       break;
     case "urgent":
-      color = "#FF0000"; // Red for urgent priority
+      color = "#FF0000"; // Redder
       label = "URGENT";
       break;
     default:
-      color = "#000000"; // Default color for unknown priority level
+      color = "#000000"; // Default
       label = "UNKNOWN";
   }
 
@@ -38,6 +38,7 @@ const WizePriority: React.FC<WizePriorityProps> = ({ level }) => {
         padding: "5px 10px",
         borderRadius: "4px",
         display: "inline-block",
+        cursor: "pointer",
       }}
     >
       {label}

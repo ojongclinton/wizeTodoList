@@ -24,23 +24,3 @@ export function getLocalStorageWithExpiry(key: string) {
   }
   return item.value;
 }
-
-// export function setLocalStorageWithExpiry(
-//   key: string,
-//   value: any,
-//   ttl: number
-// ) {
-//   const now = new Date();
-//   const existingItem = localStorage.getItem(key);
-//   if (existingItem) {
-//     const parsedItem = JSON.parse(existingItem);
-//     if (parsedItem.expiry > now.getTime()) {
-//       return;
-//     }
-//   }
-//   const item = {
-//     value: value,
-//     expiry: now.getTime() + ttl,
-//   };
-//   localStorage.setItem(key, JSON.stringify(item));
-// }

@@ -5,9 +5,7 @@ interface ValidationResults {
 export const validateInputObj = (data: any): ValidationResults => {
   const results: ValidationResults = {};
 
- 
   for (const key in data) {
-    // console.log(`${key} is ` + data[key]);
     const value = data[key];
 
     switch (key) {
