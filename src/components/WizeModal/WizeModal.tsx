@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./WizeModal.css";
+import WizeButton from "@components/WizeButton/WizeButton";
 
 interface ModalProps {
   isOpen: boolean;
@@ -27,7 +28,7 @@ const WizeModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             onClick={(e) => e.stopPropagation()}
           >
             {children}
-            <button onClick={handleClose}>Close</button>
+            <WizeButton onClick={handleClose}>Close</WizeButton>
           </div>
         </div>
       )}

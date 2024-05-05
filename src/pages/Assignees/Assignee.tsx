@@ -73,10 +73,12 @@ function Assignee() {
                   <TableCell align="left">{row.email}</TableCell>
                   <TableCell align="right">{row.phone}</TableCell>
                   <TableCell align="right">
-                    <button onClick={() => handleViewUser(row)}>View</button>
-                    <button onClick={() => removeAssigneeFromList(row)}>
+                    <WizeButton onClick={() => handleViewUser(row)}>
+                      View
+                    </WizeButton>
+                    <WizeButton onClick={() => removeAssigneeFromList(row)}>
                       Delete
-                    </button>
+                    </WizeButton>
                   </TableCell>
                 </TableRow>
               ))}

@@ -1,7 +1,7 @@
 import React from "react";
 
 interface WizeButtonProps {
-  onClick?: () => void; // Make onClick optional
+  onClick?: () => void;
   children: React.ReactNode;
 }
 

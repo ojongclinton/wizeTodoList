@@ -102,10 +102,12 @@ function Todos() {
                   </TableCell>
 
                   <TableCell align="right">
-                    <button onClick={() => handleViewTodo(row)}>View</button>
-                    <button onClick={() => removeTodoFromList(row)}>
+                    <WizeButton onClick={() => handleViewTodo(row)}>
+                      View
+                    </WizeButton>
+                    <WizeButton onClick={() => removeTodoFromList(row)}>
                       Delete
-                    </button>
+                    </WizeButton>
                   </TableCell>
                 </TableRow>
               ))}
