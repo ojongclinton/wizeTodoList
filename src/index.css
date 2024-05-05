@@ -138,6 +138,14 @@ button.btn {
   touch-action: manipulation;
 }
 
+button.btn[disabled] {
+  background-color: #ddd;
+  border-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+  fill: #999;
+}
+
 button:focus {
   color: #171e29;
 }

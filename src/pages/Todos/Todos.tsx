@@ -5,6 +5,7 @@ import { Todo } from "@/types/Todo";
 import AddTodoModal from "./Partials/AddTodoModal";
 import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
 import WizeSearch from "@/components/WizeSearch/WizeSearch";
+import WizePaginate from "@/components/Wizepaginate/WizePaginate";
 
 function Todos() {
   const [selectedTodo, setSelectedTodo] = useState<Todo>();
@@ -24,8 +25,14 @@ function Todos() {
   const [allTodos, setAllTodos] = useState<Todo[]>([]);
   const [allTodosCopy, setAllTodosCopy] = useState<Todo[]>([]);
   const [searchString, setSearchString] = useState<string>("");
+  const [paginatedTodos, setPaginatedTodos] = useState<Assignee[]>([]);
+  const [currentPageData, setCurrentPageData] = useState<any[]>([]);
 
   const [todoModalVisible, setTodoModalVisible] = useState<boolean>(false);
+
+  const handlePageChange = (data: any[]) => {
+    setCurrentPageData(data);
+  };
 
   const handleViewTodo: (t: Todo) => void = (todo) => {
     setTodoModalVisible(true);
@@ -101,11 +108,17 @@ function Todos() {
           originalData={allTodosCopy}
         />
         <WizeDataGrid
-          data={allTodos}
+          data={paginatedTodos}
           columns={todosColumns}
           actions={todosActions}
         />
       </div>
+      <WizePaginate
+        data={allTodos}
+        setData={setPaginatedTodos} // Pass setPaginatedAssignees instead of setAllAssignees
+        onPageChange={handlePageChange}
+      />
+
       <WizeButton onClick={() => setTodoModalVisible(!todoModalVisible)}>
         Create Todo
       </WizeButton>

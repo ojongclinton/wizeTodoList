@@ -11,7 +11,7 @@ const WizePaginate: React.FC<PaginatorProps> = ({
   setData,
   onPageChange,
 }) => {
-  const perPage = 3; // Number of items per page
+  const perPage = 5; // Number of items per page
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
@@ -29,13 +29,17 @@ const WizePaginate: React.FC<PaginatorProps> = ({
   return (
     <div className="pagination mt-3 mb-3">
       <button
+        className="btn"
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         Previous
       </button>
-      <span>{currentPage}</span>
+      <span style={{ fontSize: "20px" }} className="ml-2 mr-2">
+        {currentPage}
+      </span>
       <button
+        className="btn"
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage * perPage >= data.length}
       >
