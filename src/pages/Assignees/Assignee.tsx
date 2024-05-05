@@ -53,7 +53,7 @@ function Assignee() {
 
   return (
     <div>
-      <div style={{ margin: "10px 0px" }}>
+      <div className="mt-3 mb-3">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>

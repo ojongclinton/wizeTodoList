@@ -171,19 +171,19 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             <AssigneeTodoList assigneeId={modalAssignee?.id} />
           </div>
           {modalAction == ModalAction.NEW && (
-            <div style={{ float: "right" }}>
+            <div className="fl-r">
               <WizeButton onClick={handleUserCreate}>Create User</WizeButton>
             </div>
           )}
           {modalAction == ModalAction.VIEW && (
-            <div style={{ float: "right" }}>
+            <div className="fl-r">
               <WizeButton onClick={() => setModalAction(ModalAction.EDIT)}>
                 Edit Mode
               </WizeButton>
             </div>
           )}
           {modalAction == ModalAction.EDIT && (
-            <div style={{ float: "right" }}>
+            <div className="fl-r">
               <WizeButton onClick={handleEdit}>Save</WizeButton>
             </div>
           )}

@@ -56,7 +56,7 @@ function Todos() {
 
   return (
     <div>
-      <div style={{ margin: "10px 0px" }}>
+      <div className="mt-3 mb-3">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -77,13 +77,6 @@ function Todos() {
                 <TableRow key={row.id}>
                   <TableCell scope="row">{row.title}</TableCell>
                   <TableCell align="left">{row.priority}</TableCell>
-                  {/* <TableCell align="center">
-                    {row.labels.map((label, i) => (
-                      <span key={i} style={{ margin: "0px 1px" }}>
-                        {label},
-                      </span>
-                    ))}
-                  </TableCell> */}
                   <TableCell align="center">
                     {row?.assignee ? row?.assignee?.email : "Not Assigned "}
                   </TableCell>

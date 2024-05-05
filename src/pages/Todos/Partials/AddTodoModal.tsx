@@ -119,7 +119,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
         <div style={{ maxWidth: "700px" }}>
           <h3>Create new TODO</h3>
           <div style={{ padding: "10px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div className="flex justify-btw">
               <div className="inputContainer">
                 <label id="assign-name">Task Title:</label>
                 <WizeInput
@@ -165,8 +165,8 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                 />
               </div>
             </div>
-            <div style={{ display: "flex" }}>
-              <div className="inputContainer" style={{ marginRight: "5px" }}>
+            <div className="flex">
+              <div className="inputContainer mr-2">
                 <label id="todo-startDate">Start date:</label>
                 <WizeInput
                   id="todo-startDate"
@@ -205,7 +205,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                   )}
                 </p>
               </div>
-              <div className="inputContainer" style={{ marginRight: "5px" }}>
+              <div className="inputContainer mr-2">
                 <label id="todo-endDate">Completed</label>
                 <WizeInput
                   id="todo-endDate"
@@ -241,10 +241,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                 )}
               </p>
             </div>
-            <div
-              className="inputContainer"
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
+            <div className="inputContainer flex justify-btw">
               <div className="addedLabels">
                 <p>Added labels</p>
                 {modalTodo?.labels?.map((label, i) => (
@@ -284,19 +281,19 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
             </div>
           </div>
           {modalAction == ModalAction.NEW && (
-            <div style={{ float: "right" }}>
+            <div className="fl-r">
               <WizeButton onClick={handleUserCreate}>Create User</WizeButton>
             </div>
           )}
           {modalAction == ModalAction.VIEW && (
-            <div style={{ float: "right" }}>
+            <div className="fl-r">
               <WizeButton onClick={() => setModalAction(ModalAction.EDIT)}>
                 Edit Mode
               </WizeButton>
             </div>
           )}
           {modalAction == ModalAction.EDIT && (
-            <div style={{ float: "right" }}>
+            <div className="fl-r">
               <WizeButton onClick={handleEdit}>Save</WizeButton>
             </div>
           )}
