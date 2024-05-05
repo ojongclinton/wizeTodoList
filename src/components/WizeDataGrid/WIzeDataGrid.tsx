@@ -43,7 +43,7 @@ const WizeDataGrid: React.FC<WizeDataGridProps> = ({
             <TableRow key={row.id}>
               {columns.map((column, index) => {
                 if (column.acess.includes(".")) {
-                  let parts = column.acess.split(".");
+                  let parts: string[] = column.acess.split(".");
                   return (
                     <TableCell key={index} scope="row">
                       {row[[parts[0]]]

@@ -4,6 +4,7 @@ import WizeButton from "@/components/WizeButton/WizeButton";
 import { Todo } from "@/types/Todo";
 import AddTodoModal from "./Partials/AddTodoModal";
 import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
+import WizeSearch from "@/components/WizeSearch/WizeSearch";
 
 function Todos() {
   const [selectedTodo, setSelectedTodo] = useState<Todo>();
@@ -12,6 +13,7 @@ function Todos() {
       try {
         const data = await getAllTodos();
         setAllTodos(data?.data);
+        setAllTodosCopy(data?.data);
       } catch (error: any) {
         console.error("Error fetching user data:", error.message);
       }
@@ -20,6 +22,9 @@ function Todos() {
     fetchData();
   }, []);
   const [allTodos, setAllTodos] = useState<Todo[]>([]);
+  const [allTodosCopy, setAllTodosCopy] = useState<Todo[]>([]);
+  const [searchString, setSearchString] = useState<string>("");
+
   const [todoModalVisible, setTodoModalVisible] = useState<boolean>(false);
 
   const handleViewTodo: (t: Todo) => void = (todo) => {
@@ -34,14 +39,17 @@ function Todos() {
 
   const addTodoToList = (u: Todo) => {
     setAllTodos([...allTodos, u]);
+    setAllTodosCopy([...allTodos, u]);
   };
 
   const editTodoInList = (u: Todo) => {
     setAllTodos(allTodos.map((a) => (a.id === u.id ? u : a)));
+    setAllTodosCopy(allTodos.map((a) => (a.id === u.id ? u : a)));
   };
 
   const removeTodoFromList = async (u: Todo) => {
     setAllTodos(allTodos.filter((a) => a.id !== u.id));
+    setAllTodosCopy(allTodos.filter((a) => a.id !== u.id));
     let delRes = await deleteTodo(u.id);
     console.log(delRes);
   };
@@ -84,6 +92,14 @@ function Todos() {
   return (
     <div>
       <div className="mt-3 mb-3">
+        <p>Search</p>
+        <WizeSearch
+          data={allTodos}
+          setData={setAllTodos}
+          searchString={searchString}
+          setSearchString={setSearchString}
+          originalData={allTodosCopy}
+        />
         <WizeDataGrid
           data={allTodos}
           columns={todosColumns}
