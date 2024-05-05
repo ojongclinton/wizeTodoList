@@ -1,30 +1,59 @@
-# React + TypeScript + Vite
+# WizeTodoList
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The name of the Project
 
-Currently, two official plugins are available:
+## Demo link:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project not yet online
 
-## Expanding the ESLint configuration
+## Table of Content:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [About The App](#about-the-app)
+- [Screenshots](#screenshots)
+- [Technologies](#technologies)
+- [Setup](#setup)
 
-- Configure the top-level `parserOptions` property like this:
+## About The App
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+WizeTodoList is an application designed to efficiently manage users (Assignees) and tasks (Todos). Users can be added to the system via the Assignees page accessible from the sidebar. Simply click on the "Create Assignee" button and enter the user details.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Once users are created, you can navigate to the Todos page to select or create new tasks and assign them to the desired user.
+
+## Screenshots
+
+### Assignees page
+
+![Assignees page](image.png)
+
+### Todos page
+
+![todos page](image-1.png)
+
+### Create Todo Modal
+
+![alt text](image-2.png)
+
+## Technologies
+
+This project is built using the following technologies:
+
+- react
+- typescript
+- css
+
+## Setup
+
+To run this project locally, follow these steps:
+
+- Clone the repository : <br />
+  `git clone https://github.com/ojongclinton/wizeTodoList.git`
+- Navigate to the project directory : <br />
+  `cd wizeTodoList`
+
+- Install dependencies: <br />
+  `npm install`
+
+- Start the development server : <br />
+  `npm run dev`
+
+  Once the server is running, you will see the local address (e.g., http://localhost:3000) in your terminal. Open this address in your browser to view the application.
