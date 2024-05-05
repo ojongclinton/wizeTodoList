@@ -71,10 +71,10 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
     return [200, { staus: "success", data: users }];
   });
 
-  mock.onAny().reply(200, {
-    status: "Any other call will get this 😀",
-    moreData: users,
-  });
+  // mock.onAny().reply(200, {
+  //   status: "Any other call will get this 😀",
+  //   moreData: users,
+  // });
 
   //TODO-ROUTES
   mock.onPost("/todos/create").reply((config) => {
@@ -104,14 +104,13 @@ export default function applyMockAdapter(axiosInstance: AxiosInstance) {
     updateLocalStorage(TODOS_KEY, todos);
 
     return [200, { message: "Todo deleted succesfully" }];
-  })
+  });
 
-  mock.onPost('/todo/assignToAssignee').reply((config)=>{
+  mock.onPost("/todo/assignToAssignee").reply((config) => {
     const todo: Todo = JSON.parse(config.data);
     todos = todos.map((t) => (t.id === todo.id ? todo : t));
     updateLocalStorage(TODOS_KEY, todos);
 
     return [200, { message: "Todo updated succesfully", data: todo }];
-  })
-
+  });
 }

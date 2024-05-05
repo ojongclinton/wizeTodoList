@@ -25,7 +25,10 @@ export const validateInputObj = (data: any): ValidationResults => {
       // Add more cases for other properties as needed
       default:
         // No specific validation for other properties
-        results[key] = value.trim().length > 0;
+        if (results[key]) {
+          results[key] = value.trim().length > 0;
+        }
+
         break;
     }
   }

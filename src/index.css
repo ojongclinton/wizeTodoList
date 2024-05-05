@@ -93,7 +93,7 @@ input:focus {
 }
 
 /* CSS */
-button {
+button.btn {
   align-items: center;
   background-color: #fff;
   border: 2px solid #000;

@@ -2,8 +2,8 @@ export interface Todo {
   id: string;
   title: string;
   assignee: Assignee | null;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | null;
+  endDate: Date | null;
   description: string;
   priority: Priority;
   labels: Labels[];
@@ -21,4 +21,7 @@ export enum Labels {
   IN_PROGRESS = "IN_PROGRESS",
   IN_REVIEW = "IN_REVIEW",
   DONE = "DONE",
+  PAIRING = "PAIRING",
+  FEATURE = "FEATURE",
+  BUG = "BUG",
 }
