@@ -5,28 +5,24 @@ interface ValidationResults {
 export const validateInputObj = (data: any): ValidationResults => {
   const results: ValidationResults = {};
 
-  // Validate each property in the data object
+ 
   for (const key in data) {
+    // console.log(`${key} is ` + data[key]);
     const value = data[key];
 
     switch (key) {
-      case "text":
-        // Example name validation (can be customized)
-        results[key] = value.trim().length > 0;
+      case "name":
+        results[key] = value.trim().length > 3;
         break;
       case "email":
-        // Example email validation (can be customized)
         results[key] = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         break;
       case "phone":
-        // Example telephone validation (can be customized)
-        results[key] = /^\d{10}$/.test(value); // Assuming 10-digit phone number
+        results[key] = /^\d{9}$/.test(value);
         break;
-      // Add more cases for other properties as needed
       default:
-        // No specific validation for other properties
         if (results[key]) {
-          results[key] = value.trim().length > 0;
+          results[key] = value.trim().length > 3;
         }
 
         break;
