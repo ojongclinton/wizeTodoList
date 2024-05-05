@@ -110,7 +110,11 @@ function Todos() {
           setSearchString={setSearchString}
           originalData={allTodosCopy}
         />
-        {/* <WizeFilter data={allTodos} setData={setAllTodos} /> */}
+        <WizeFilter
+          data={allTodos}
+          setData={setAllTodos}
+          originalData={allTodosCopy}
+        />
         <WizeDataGrid
           data={paginatedTodos}
           columns={todosColumns}

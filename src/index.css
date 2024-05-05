@@ -269,3 +269,7 @@ textarea:focus {
 .justify-btw {
   justify-content: space-between;
 }
+
+.justify-arn {
+  justify-content: space-around;
+}
