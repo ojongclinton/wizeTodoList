@@ -4,6 +4,7 @@ import AddUserModal from "./Partials/AddAssigneeModal";
 import WizeButton from "@/components/WizeButton/WizeButton";
 import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
 import WizeSearch from "@/components/WizeSearch/WizeSearch";
+import WizePaginate from "@/components/Wizepaginate/WizePaginate";
 
 function Assignee() {
   const [selectedAssignee, setSelectedAssignee] = useState<Assignee>();
@@ -25,10 +26,16 @@ function Assignee() {
   const [allAssigneesCopy, setAllAssigneesCopy] = useState<Assignee[]>([]);
   const [userModalVisible, setUserModalVisible] = useState<boolean>(false);
   const [searchString, setSearchString] = useState<string>("");
+  const [paginatedAssignees, setPaginatedAssignees] = useState<Assignee[]>([]);
+  const [currentPageData, setCurrentPageData] = useState<any[]>([]);
 
   const handleViewUser: (a: Assignee) => void = (assignee) => {
     setUserModalVisible(true);
     setSelectedAssignee(assignee);
+  };
+
+  const handlePageChange = (data: any[]) => {
+    setCurrentPageData(data);
   };
 
   const handleModalClose = () => {
@@ -88,11 +95,16 @@ function Assignee() {
           originalData={allAssigneesCopy}
         />
         <WizeDataGrid
-          data={allAssignees}
+          data={paginatedAssignees}
           columns={assigneesColumns}
           actions={assigneesActions}
         />
       </div>
+      <WizePaginate
+        data={allAssignees}
+        setData={setPaginatedAssignees} // Pass setPaginatedAssignees instead of setAllAssignees
+        onPageChange={handlePageChange}
+      />
       <WizeButton onClick={() => setUserModalVisible(!userModalVisible)}>
         Create Assignee
       </WizeButton>
