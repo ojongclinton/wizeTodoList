@@ -189,26 +189,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                   )}
                 </p>
               </div>
-              <div className="inputContainer" style={{ marginRight: "5px" }}>
-                <label id="todo-endDate">End date:</label>
-                <WizeInput
-                  id="todo-endDate"
-                  type="date"
-                  name="name"
-                  value={
-                    modalTodo?.endDate
-                      ? new Date(modalTodo?.endDate).toISOString().slice(0, 10)
-                      : ""
-                  }
-                  readOnly={modalAction === ModalAction.VIEW}
-                  onChange={(e) => handleChange("endDate", e.target.value)}
-                />
-                <p className="error">
-                  {showErrors && !validationRes?.name && (
-                    <span>Enter a valid name</span>
-                  )}
-                </p>
-              </div>
+
               <div className="inputContainer">
                 <label id="todo-endDate">Priority</label>
                 <WizeInput
@@ -222,6 +203,25 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                 <p className="error">
                   {showErrors && !validationRes?.name && (
                     <span>Select task priority</span>
+                  )}
+                </p>
+              </div>
+              <div className="inputContainer" style={{ marginRight: "5px" }}>
+                <label id="todo-endDate">Completed</label>
+                <WizeInput
+                  id="todo-endDate"
+                  type="checkbox"
+                  name="name"
+                  checked={modalTodo?.endDate ? true : false}
+                  readOnly={modalAction === ModalAction.VIEW}
+                  onChange={(e) => {
+                    if (e.target.checked) handleChange("endDate", new Date());
+                    if (!e.target.checked) handleChange("endDate", null);
+                  }}
+                />
+                <p className="error">
+                  {showErrors && !validationRes?.name && (
+                    <span>Enter a valid name</span>
                   )}
                 </p>
               </div>
