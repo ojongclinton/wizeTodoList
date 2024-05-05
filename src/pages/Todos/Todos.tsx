@@ -1,16 +1,9 @@
 import { getAllTodos, deleteTodo } from "@/utils/api/Todos";
-import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-// import AddUserModal from "./Partials/AddAssigneeModal";
+import { useEffect, useState } from "react";
 import WizeButton from "@/components/WizeButton/WizeButton";
 import { Todo } from "@/types/Todo";
 import AddTodoModal from "./Partials/AddTodoModal";
+import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
 
 function Todos() {
   const [selectedTodo, setSelectedTodo] = useState<Todo>();
@@ -18,7 +11,6 @@ function Todos() {
     const fetchData = async () => {
       try {
         const data = await getAllTodos();
-        console.log(data);
         setAllTodos(data?.data);
       } catch (error: any) {
         console.error("Error fetching user data:", error.message);
@@ -53,60 +45,50 @@ function Todos() {
     let delRes = await deleteTodo(u.id);
     console.log(delRes);
   };
+  const todosColumns = [
+    {
+      label: "Task Name",
+      acess: "title",
+    },
+    {
+      label: "Priority",
+      acess: "priority",
+    },
+    {
+      label: "Assignee",
+      acess: "assignee.email",
+    },
+    {
+      label: "Status",
+      acess: "endDate",
+      render: (endDate: string) => {
+        return endDate ? "Done" : "Not Done";
+      },
+    },
+    {
+      label: "Start Date",
+      acess: "startDate",
+      render: (startDate: any) => {
+        console.log(startDate);
+        return startDate
+          ? new Date(startDate).toLocaleDateString()
+          : "Not started";
+      },
+    },
+  ];
+  const todosActions = [
+    { label: "View", onClick: handleViewTodo },
+    { label: "Delete", onClick: removeTodoFromList },
+  ];
 
   return (
     <div>
       <div className="mt-3 mb-3">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell component="th" style={{ fontWeight: 900 }}>
-                  Task name
-                </TableCell>
-                <TableCell align="left">Priority</TableCell>
-                {/* <TableCell align="center">labels</TableCell> */}
-                <TableCell align="center">Assignee</TableCell>
-                <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Start Date</TableCell>
-                <TableCell align="right">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {allTodos.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell scope="row">{row.title}</TableCell>
-                  <TableCell align="left">{row.priority}</TableCell>
-                  <TableCell align="center">
-                    {row?.assignee ? row?.assignee?.email : "Not Assigned "}
-                  </TableCell>
-
-                  <TableCell scope="row" align="right">
-                    {row.endDate
-                      ? `Done on : ${new Date(
-                          row.endDate
-                        ).toLocaleDateString()}`
-                      : "Not Done"}
-                  </TableCell>
-                  <TableCell scope="row" align="right">
-                    {row.startDate
-                      ? new Date(row.startDate).toLocaleDateString()
-                      : "Not started"}
-                  </TableCell>
-
-                  <TableCell align="right">
-                    <WizeButton onClick={() => handleViewTodo(row)}>
-                      View
-                    </WizeButton>
-                    <WizeButton onClick={() => removeTodoFromList(row)}>
-                      Delete
-                    </WizeButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <WizeDataGrid
+          data={allTodos}
+          columns={todosColumns}
+          actions={todosActions}
+        />
       </div>
       <WizeButton onClick={() => setTodoModalVisible(!todoModalVisible)}>
         Create Todo

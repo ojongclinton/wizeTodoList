@@ -246,6 +246,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                 <p>Added labels</p>
                 {modalTodo?.labels?.map((label, i) => (
                   <p
+                    className="chip"
                     key={i}
                     onClick={() => {
                       handleChange(
@@ -267,6 +268,7 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
                   if (!found) {
                     return (
                       <p
+                        className="chip"
                         key={i}
                         onClick={() => {
                           handleChange("labels", [...modalTodo.labels, label]);

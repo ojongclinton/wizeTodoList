@@ -92,6 +92,24 @@ input:focus {
   margin: 5px 0px;
 }
 
+.chip {
+  display: block;
+  padding: 6px 12px;
+  margin: 4px;
+  border-radius: 16px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Chip hover style */
+.chip:hover {
+  background-color: #ccc;
+}
+
 /* CSS */
 button.btn {
   align-items: center;
@@ -222,6 +240,6 @@ button:active {
   display: flex;
 }
 
-.justify-btw{
+.justify-btw {
   justify-content: space-between;
 }

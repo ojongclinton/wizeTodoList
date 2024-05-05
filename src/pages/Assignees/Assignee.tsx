@@ -1,14 +1,8 @@
 import { getAllUsers, deleteUser } from "@/utils/api/Assignees";
-import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { useEffect, useState } from "react";
 import AddUserModal from "./Partials/AddAssigneeModal";
 import WizeButton from "@/components/WizeButton/WizeButton";
+import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
 
 function Assignee() {
   const [selectedAssignee, setSelectedAssignee] = useState<Assignee>();
@@ -51,40 +45,32 @@ function Assignee() {
     await deleteUser(u.id);
   };
 
+  const assigneesColumns = [
+    {
+      label: "Full Name",
+      acess: "name",
+    },
+    {
+      label: "Email",
+      acess: "email",
+    },
+    {
+      label: "Telephone",
+      acess: "phone",
+    },
+  ];
+  const assigneesActions = [
+    { label: "View", onClick: handleViewUser },
+    { label: "Delete", onClick: removeAssigneeFromList },
+  ];
   return (
     <div>
       <div className="mt-3 mb-3">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell component="th" style={{ fontWeight: 900 }}>
-                  Full name
-                </TableCell>
-                <TableCell align="left">Email</TableCell>
-                <TableCell align="right">Telephone</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {allAssignees.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell scope="row">{row.name}</TableCell>
-                  <TableCell align="left">{row.email}</TableCell>
-                  <TableCell align="right">{row.phone}</TableCell>
-                  <TableCell align="right">
-                    <WizeButton onClick={() => handleViewUser(row)}>
-                      View
-                    </WizeButton>
-                    <WizeButton onClick={() => removeAssigneeFromList(row)}>
-                      Delete
-                    </WizeButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <WizeDataGrid
+          data={allAssignees}
+          columns={assigneesColumns}
+          actions={assigneesActions}
+        />
       </div>
       <WizeButton onClick={() => setUserModalVisible(!userModalVisible)}>
         Create Assignee
