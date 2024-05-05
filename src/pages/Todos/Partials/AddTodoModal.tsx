@@ -61,7 +61,6 @@ const AddTodoModal: React.FC<AddUserModalProps> = ({
     "BUG",
   ];
   let validationRes = validateInputObj(modalTodo);
-  console.log(validationRes);
 
   useEffect(() => {
     getAllUsers().then((res: any) => {

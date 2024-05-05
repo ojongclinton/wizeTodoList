@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AssigneeTodoList from "./AssigneeTodoList";
 import WizeInput from "@/components/WizeInput/WizeInput";
 import { v4 as uuidv4 } from "uuid";
-import { createUser, updateUser } from "@/utils/api/Assignees";
+import { createUser, updateUser, getAllUsers } from "@/utils/api/Assignees";
 import WizeButton from "@/components/WizeButton/WizeButton";
 import { validateInputObj } from "@/utils/validator";
 
@@ -47,9 +47,15 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
   const [showErrors, setShowErrors] = useState(false);
 
   const [assigneeTodos, setAssigneeTodos] = useState<Todo | []>([]);
+  const [allUsers, setAllUsers] = useState<Assignee[]>([]);
   let validationRes = validateInputObj(modalAssignee);
   console.log(validationRes);
 
+  useEffect(() => {
+    let res = getAllUsers().then((res: any) => {
+      setAllUsers(res.data);
+    });
+  }, []);
   useEffect(() => {
     setShowErrors(false);
     if (selectedAssignee) {
@@ -70,6 +76,18 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
 
   const handleUserCreate = async () => {
     setShowErrors(true);
+    let uExist = false;
+    for (let i = 0; i < allUsers.length; i++) {
+      if (allUsers[i].name == modalAssignee.name) {
+        uExist = true;
+        break;
+      }
+    }
+    if (uExist) {
+      alert(`The name : " ${modalAssignee.name} " is already taken`);
+      validationRes.name = false;
+    }
+
     if (Object.values(validationRes).every((val) => val)) {
       let res = await createUser(modalAssignee);
       console.log(res);
