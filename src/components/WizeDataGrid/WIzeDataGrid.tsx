@@ -25,7 +25,7 @@ const WizeDataGrid: React.FC<WizeDataGridProps> = ({
   allData,
 }) => {
   const exportToExcel = () => {
-    const exportData = allData.map((row) => {
+    const exportData = data.map((row) => {
       const exportedRow: { [key: string]: any } = {};
       columns.forEach((column) => {
         if (column.acess.includes(".")) {
