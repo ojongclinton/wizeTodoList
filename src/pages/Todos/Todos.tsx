@@ -116,6 +116,7 @@ function Todos() {
           originalData={allTodosCopy}
         />
         <WizeDataGrid
+          allData={allTodosCopy}
           data={paginatedTodos}
           columns={todosColumns}
           actions={todosActions}

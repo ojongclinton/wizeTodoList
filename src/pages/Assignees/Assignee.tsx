@@ -95,6 +95,7 @@ function Assignee() {
           originalData={allAssigneesCopy}
         />
         <WizeDataGrid
+          allData={allAssigneesCopy}
           data={paginatedAssignees}
           columns={assigneesColumns}
           actions={assigneesActions}
