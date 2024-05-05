@@ -6,6 +6,7 @@ import AddTodoModal from "./Partials/AddTodoModal";
 import WizeDataGrid from "@/components/WizeDataGrid/WIzeDataGrid";
 import WizeSearch from "@/components/WizeSearch/WizeSearch";
 import WizePaginate from "@/components/Wizepaginate/WizePaginate";
+import WizePriority from "@/components/WizePriority/WizePriority";
 
 function Todos() {
   const [selectedTodo, setSelectedTodo] = useState<Todo>();
@@ -58,7 +59,6 @@ function Todos() {
     setAllTodos(allTodos.filter((a) => a.id !== u.id));
     setAllTodosCopy(allTodos.filter((a) => a.id !== u.id));
     let delRes = await deleteTodo(u.id);
-    console.log(delRes);
   };
   const todosColumns = [
     {
@@ -68,6 +68,9 @@ function Todos() {
     {
       label: "Priority",
       acess: "priority",
+      render: (priority: string) => {
+        return <WizePriority level={priority.toLowerCase()} />;
+      },
     },
     {
       label: "Assignee",
